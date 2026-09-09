@@ -1,3 +1,7 @@
+# ==============================================================================
+# Docker Compose para el proyecto CRUD Laravel
+# ==============================================================================
+
 services:
   laravel:
     build:
@@ -5,9 +9,14 @@ services:
       dockerfile: Dockerfile
     container_name: crud_laravel
     ports:
+      # Mapeo de puertos (Host:Contenedor) -> http://localhost:8000
       - "8000:8000"
     volumes:
+      # Mapeo del código local para permitir cambios en tiempo real
       - .:/var/www/html
+      # Volúmenes anónimos para aislar vendor/ y node_modules/ instalados en el contenedor
+      - /var/www/html/vendor
+      - /var/www/html/node_modules
     environment:
       APP_ENV: local
       APP_DEBUG: "true"
